@@ -7,13 +7,10 @@ import os
 
 def pathFind() :
     imagePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
-    ggList.set(imagePath)
-    print(imagePath)
     imageList = []
     for p in imagePath :
         imageList.append(cv2.imread(p))
-    print(imageList)
-    #ggList.set(imageList)
+    
     
     
 
