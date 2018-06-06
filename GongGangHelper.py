@@ -54,16 +54,14 @@ def divideEverytime(img):
     # 자르기
     weekNullTime = [] #공강 5열 행렬
 
-    subImgList = []
-
     for i in range(len(ax)-1):
         subImg = img[:,ax[i]:ax[i+1]]
-        subImgList.append(subImg)
-        
+        cv2.imwrite('dvdImg\subImg{0}.png'.format(i), subImg)
+
     time = list(range(8,24))
 
     for i in range(1,6):
-        img = subImgList[i]
+        img = cv2.imread('dvdImg\subImg{0}.png'.format(i))
 
         dayNullTime = [] #공강 1열 행렬  
     
@@ -185,7 +183,7 @@ def pathFind() :
     imagePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
     print(imagePath)
     for p in imagePath :
-        imageList.append(cv2.imread(p))
+        imageList.append(numpy.array(Image.open(p)))
 
     if len(dayList) == 0 :
         ggList.set(tuple())
@@ -308,7 +306,7 @@ ggscrol.config(command=ggListBox.yview)
 ggscrol.pack(side='right', fill = 'y')
 # Developer
 developer = Label(root,
-                  text='Developed by HyunJae Lee, Wonsik Shin, SungKyunKwan Univ.')
+                  text='Developed by HyunJae Lee, Wonsik Shin in SungKyunKwan Univ.')
 
 developer.config(font=('굴림',10))
 developer.grid(row = 7, padx = 5, pady = 2, column = 1)
