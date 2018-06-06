@@ -306,7 +306,8 @@ ggscrol.config(command=ggListBox.yview)
 ggscrol.pack(side='right', fill = 'y')
 # Developer
 developer = Label(root,
-                  text='Developed by HyunJae Lee, Wonsik Shin\nDepartment of Statistics, Sungkyunkwan Univ.',
+                  text='''Developed by HyunJae Lee, Wonsik Shin
+                  Department of Statistics, Sungkyunkwan Univ.''',
                   justify = RIGHT,
                   anchor = E)
 
