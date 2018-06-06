@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
-import numpy
+from numpy import array
+from numpy import delete
 from PIL import Image
 
 def divideEverytime(img):
@@ -85,8 +86,8 @@ def divideEverytime(img):
 
         weekNullTime.append(dayNullTime)
 
-    result = numpy.array(weekNullTime).transpose()
-    result = numpy.delete(result, [0,1,2,3], 0)
+    result = array(weekNullTime).transpose()
+    result = delete(result, [0,1,2,3], 0)
     
     return(result)
 
@@ -182,7 +183,7 @@ def pathFind() :
     global imageList
     imagePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
     for p in imagePath :
-        imageList.append(numpy.array(Image.open(p)))
+        imageList.append(array(Image.open(p)))
 
     if len(dayList) == 0 :
         ggList.set(tuple())
