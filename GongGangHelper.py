@@ -183,7 +183,6 @@ dayList = ['mon','tue','wed','thu','fri']
 def pathFind() :
     global imageList
     imagePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
-    print(imagePath)
     for p in imagePath :
         imageList.append(numpy.array(Image.open(p)))
 
