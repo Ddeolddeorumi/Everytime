@@ -180,7 +180,8 @@ img2 = cv2.imread('everytime2.jpg')
 img3 = cv2.imread('everytime3.jpg')
 imgList =[img1, img2, img3]
 
-for i in tellOurNull(imgList,day=['fri','mon','wed']):
-    print(i)
+if __name__ == "__main__":
+    for i in tellOurNull(imgList,day=['fri','mon','wed']):
+        print(i)
 
 
