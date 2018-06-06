@@ -183,7 +183,7 @@ def pathFind() :
     imagePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
     print(imagePath)
     for p in imagePath :
-        imageList.append(cv2.imread(p))
+        imageList.append(numpy.array(Image.open(p)))
 
     if len(dayList) == 0 :
         ggList.set(tuple())
@@ -306,7 +306,7 @@ ggscrol.config(command=ggListBox.yview)
 ggscrol.pack(side='right', fill = 'y')
 # Developer
 developer = Label(root,
-                  text='Developed by HyunJae Lee, Wonsik Shin, SungKyunKwan Univ.')
+                  text='Developed by HyunJae Lee, Wonsik Shin in SungKyunKwan Univ.')
 
 developer.config(font=('굴림',10))
 developer.grid(row = 7, padx = 5, pady = 2, column = 1)
