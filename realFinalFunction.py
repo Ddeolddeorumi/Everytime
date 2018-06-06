@@ -54,14 +54,16 @@ def divideEverytime(img):
     # 자르기
     weekNullTime = [] #공강 5열 행렬
 
+    subImgList = []
+
     for i in range(len(ax)-1):
         subImg = img[:,ax[i]:ax[i+1]]
-        cv2.imwrite('dvdImg\subImg{0}.png'.format(i), subImg)
-
+        subImgList.append(subImg)
+        
     time = list(range(8,24))
 
     for i in range(1,6):
-        img = cv2.imread('dvdImg\subImg{0}.png'.format(i))
+        img = subImgList[i]
 
         dayNullTime = [] #공강 1열 행렬  
     
