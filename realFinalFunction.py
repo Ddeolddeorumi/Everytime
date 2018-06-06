@@ -175,40 +175,140 @@ def tellOurNull(imgList,day=['all']):
 
     return(speaker)
 
+
+imageList = []
+dayList = ['mon','tue','wed','thu','fri']
 def pathFind() :
+    global imageList
     imagePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
-    imageList = []
     for p in imagePath :
         imageList.append(cv2.imread(p))
 
-    ggList.set(tellOurNull(imageList))
+    if len(dayList) == 0 :
+        ggList.set(tuple())
+    else :
+        ggList.set(tellOurNull(imageList,day=dayList))
+
+def refreshFunc() :
+    if len(imageList) == 0 :
+        return 0
+    if len(dayList) == 0 :
+        ggList.set(tuple())
+    else :
+        ggList.set(tellOurNull(imageList,day=dayList))
     
+def monBut() :
+    global dayList
+    if monB['bg'] == 'sky blue' :
+        monB['bg'] = 'red'
+        dayList.remove('mon')
+    else :
+        monB['bg'] = 'sky blue'
+        dayList.append('mon')
     
+def tueBut() :
+    global dayList
+    if tueB['bg'] == 'sky blue' :
+        tueB['bg'] = 'red'
+        dayList.remove('tue')
+    else :
+        tueB['bg'] = 'sky blue'
+        dayList.append('tue')
+
+def wedBut() :
+    global dayList
+    if wedB['bg'] == 'sky blue' :
+        wedB['bg'] = 'red'
+        dayList.remove('wed')
+    else :
+        wedB['bg'] = 'sky blue'
+        dayList.append('wed')
+
+def thuBut() :
+    global dayList
+    if thuB['bg'] == 'sky blue' :
+        thuB['bg'] = 'red'
+        dayList.remove('thu')
+    else :
+        thuB['bg'] = 'sky blue'
+        dayList.append('thu')
+
+def friBut() :
+    global dayList
+    if friB['bg'] == 'sky blue' :
+        friB['bg'] = 'red'
+        dayList.remove('fri')
+    else :
+        friB['bg'] = 'sky blue'
+        dayList.append('fri')
     
 
 
 root = Tk()
 root.title('GongGang Helper')
 
+# Title
 rootTitle = Label(root, text = '공강 계산기')
 rootTitle.config(font=('굴림',30,'bold'))
 rootTitle.grid(padx = 10, pady = 30, row = 0, column = 0,
-               columnspan = 3)
+               columnspan = 2)
 
-explanation = Label(root, text='시간표 이미지를 선택해 주세요.')
+# browse frame
+browseFrame = Frame(root)
+browseFrame.grid(row = 1, column = 0, columnspan = 2)
+
+# Lable
+explanation = Label(browseFrame, text='시간표 이미지를 선택해 주세요.')
 explanation.grid(padx=5, pady=10, row = 1, column = 0, sticky = 'e')
 
-browseBtn = Button(root, text = 'Browse', command=pathFind)
+# Button
+browseBtn = Button(browseFrame, text = 'Browse', command=pathFind)
 browseBtn.grid(padx=5, pady=10, row = 1, column = 1,
                columnspan = 1, sticky = 'w')
 
+# Button Frame
+weekday = Frame(root)
+weekday.grid(padx = 5, pady = 3, row = 2, column = 0, columnspan = 2)
+# Each button of the Frame
+monB = Button(weekday, text = 'Mon', bg = 'sky blue', fg = 'white',
+              command = monBut)
+monB.grid(padx = 5, pady = 0, row = 0, column = 0)
+tueB = Button(weekday, text = 'Tue', bg = 'sky blue', fg = 'white',
+              command = tueBut)
+tueB.grid(padx = 5, pady = 0, row = 0, column = 1)
+wedB = Button(weekday, text = 'Wed', bg = 'sky blue', fg = 'white',
+              command = wedBut)
+wedB.grid(padx = 5, pady = 0, row = 0, column = 2)
+thuB = Button(weekday, text = 'Thu', bg = 'sky blue', fg = 'white',
+              command = thuBut)
+thuB.grid(padx = 5, pady = 0, row = 0, column = 3)
+friB = Button(weekday, text = 'Fri', bg = 'sky blue', fg = 'white',
+              command = friBut)
+friB.grid(padx = 5, pady = 0, row = 0, column = 4)
+refreshB = Button(weekday, text = 'Refresh', bg = 'orange', fg = 'white',
+                  command = refreshFunc)
+refreshB.grid(padx = 5, pady = 0, row = 0, column = 5)
 
 
-
-ggList = StringVar()
-ggListBox = Listbox(root, width=60, height=20, listvariable=ggList)
-ggListBox.grid(padx=20, pady=15, row = 2, column = 0,
+# List Frame
+listframe = Frame(root)
+listframe.grid(padx=20, pady=15, row = 3, column = 0,
                rowspan = 4, columnspan = 2)
+
+# Listbox
+ggList = StringVar()
+ggListBox = Listbox(listframe, width=60, height=20, listvariable=ggList)
+ggListBox.pack(side='left', fill = 'y')
+# scroll bar
+ggscrol = Scrollbar(listframe, orient = "vertical")
+ggscrol.config(command=ggListBox.yview)
+ggscrol.pack(side='right', fill = 'y')
+# Developer
+developer = Label(root,
+                  text='Developed by HyunJae Lee, Wonsik Shin, SungKyunKwan Univ.')
+
+developer.config(font=('굴림',10))
+developer.grid(row = 7, padx = 5, pady = 2, column = 1)
 
 root.mainloop()
 
